@@ -1,14 +1,11 @@
 package dev.xf3d3.timeblockeraser.listener;
 
 import dev.xf3d3.timeblockeraser.TimeBlockEraser;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityPlaceEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -49,15 +46,12 @@ public class EntityPlace implements Listener {
 
             if (
                     plugin.getSettings().getWorldGuardHook() &&
-                    !plugin.getWorldGuardHook().checkFlag(player.getLocation(), plugin.getWorldGuardHook().getFlag("entity"))
+                            !plugin.getWorldGuardHook().checkFlag(player.getLocation(), plugin.getWorldGuardHook().getFlag("entity"))
             ) {
-                // TODO: remove debug
-                plugin.getLogger().log(Level.WARNING, "not removing entity because of worldguard flag");
-
                 continue;
             }
 
-            plugin.runLater(entity::remove, plugin.getSettings().getEntities().get(key));
+            plugin.runLaterAtEntity(entity, entity::remove, plugin.getSettings().getEntities().get(key));
         }
     }
 }

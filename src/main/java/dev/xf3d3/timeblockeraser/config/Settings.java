@@ -22,7 +22,7 @@ public class Settings {
 
     @YamlComment("Enabled Worlds")
     @YamlKey("enabled-worlds")
-    private List<String> enabledWorlds = List.of("BoxPvP", "MyWorld");
+    private List<String> enabledWorlds = List.of("BoxPvP", "MyWorld", "world");
 
     @YamlComment("Enable bypass permission")
     @YamlKey("bypass-perm")
@@ -45,6 +45,13 @@ public class Settings {
             "ENDER_CRYSTAL", 10
     );
 
+    @YamlComment("Make ALL placed blocks temporary - overrides individual block settings when enabled")
+    @YamlKey("all_blocks.enabled")
+    private boolean allBlocksEnabled = false;
+
+    @YamlKey("all_blocks.time")
+    private int allBlocksTime = 20;
+
     public boolean enableBypass() {
         return bypass;
     }
@@ -63,5 +70,13 @@ public class Settings {
 
     public Map<String, Integer> getEntities() {
         return entities;
+    }
+
+    public boolean isAllBlocksEnabled() {
+        return allBlocksEnabled;
+    }
+
+    public int getAllBlocksTime() {
+        return allBlocksTime;
     }
 }

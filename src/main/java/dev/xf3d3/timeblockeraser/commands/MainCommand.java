@@ -7,6 +7,7 @@ import dev.xf3d3.timeblockeraser.utils.Utils;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
+@SuppressWarnings("unused")
 @CommandAlias("timeblockeraser")
 public class MainCommand extends BaseCommand {
     private final TimeBlockEraser plugin;
@@ -35,7 +36,7 @@ public class MainCommand extends BaseCommand {
     public void reloadSubcommand(CommandSender sender) {
         sender.sendMessage(Utils.Color("&3Reloading the plugin..."));
 
-        plugin.runSync(() -> {
+        plugin.runSync(task -> {
             plugin.loadConfigs();
             sender.sendMessage(Utils.Color("&3Plugin reloaded successfully!"));
         });
